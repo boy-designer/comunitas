@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Komunitas — Nama Komunitas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --muted:#9aa6bd;
+      --accent:#1e90ff; /* blue */
+      --gold:#d4af37; /* gold accent */
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#071228 0%, #071229 40%, #0b1724 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+    .container{width:92%;max-width:var(--maxw);margin:0 auto}
+
+    /* Header */
+    header{backdrop-filter: blur(6px);position:sticky;top:12px;z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(2,6,23,0.6);}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:800;color:#081221}
+    .brand h1{font-size:18px;margin:0}
+    nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    nav a:hover{color:var(--gold)}
+    .cta{background:linear-gradient(90deg,var(--gold),#ffc857);padding:8px 14px;border-radius:10px;color:#071221;font-weight:700}
+    /* Mobile */
+    .menu-btn{display:none;border:0;background:none;color:var(--muted);font-size:20px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;padding:70px 0}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:26px;border-radius:var(--radius);box-shadow:0 12px 30px rgba(3,7,22,0.6)}
+    .eyebrow{display:inline-block;background:var(--glass);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:13px;margin-bottom:14px}
+    .hero h2{margin:6px 0 12px;font-size:34px;line-height:1.02}
+    .lead{color:var(--muted);margin-bottom:18px}
+    .actions{display:flex;gap:12px}
+    .btn{padding:12px 16px;border-radius:12px;border:0;font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#4aa3ff);color:#021228}
+    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* Right column: hero image placeholder */
+    .hero-illu{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);}
+    .hero-illu img{width:100%;display:block;height:100%;object-fit:cover}
+
+    /* Sections */
+    section{padding:44px 0}
+    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .section-title h3{margin:0}
+    .card-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .card h4{margin:8px 0}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .gallery img{width:100%;height:160px;object-fit:cover;border-radius:10px;cursor:pointer;display:block}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 380px;gap:18px}
+    .form input,.form textarea{width:100%;padding:12px;border-radius:10px;border:0;background:rgba(255,255,255,0.03);color:inherit;outline:none}
+    .form textarea{min-height:140px;resize:vertical}
+
+    footer{padding:30px 0;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr 1fr}
+      .card-row{grid-template-columns:repeat(2,1fr)}
+      .gallery{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width:720px){
+      .nav{padding:12px}
+      nav ul{display:none}
+      .menu-btn{display:block}
+      .hero{grid-template-columns:1fr;gap:20px;padding:28px 0}
+      .hero-illu{order:1}
+      .card-row{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .contact-grid{grid-template-columns:1fr}
+    }
+
+    /* Small animations */
+    .fade-up{transform-origin:center;transform:translateY(6px);opacity:0;transition:all .45s cubic-bezier(.2,.9,.2,1)}
+    .fade-up.show{transform:translateY(0);opacity:1}
+
+    /* utilities */
+    .muted-block{color:var(--muted)}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:transparent;padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);font-size:13px}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:60}
+    .modal.open{display:flex}
+    .modal-card{background:linear-gradient(180deg,#081125 0%,#091426 100%);padding:20px;border-radius:12px;max-width:680px;width:94%;}
+
+  </style>
+</head>
+<body>
+  <header class="container" aria-label="header">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">KM</div>
+        <div>
+          <h1>Nama Komunitas</h1>
+          <div class="muted" style="font-size:12px">Bersatu • Berbagi • Berkembang</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">Beranda</a></li>
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#events">Kegiatan</a></li>
+          <li><a href="#gallery">Galeri</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+      </nav>
+      <button class="menu-btn" aria-label="buka menu"><i class="fas fa-bars"></i></button>
+    </div>
+  </header>
+
+  <main class="container" id="home">
+    <section class="hero">
+      <div class="hero-card fade-up" style="--delay:.05s">
+        <div class="eyebrow">Komunitas Lokal</div>
+        <h2>Selamat datang di <span style="color:var(--gold)">Nama Komunitas</span></h2>
+        <p class="lead">Kami adalah komunitas yang bergerak di bidang pengembangan diri, kegiatan sosial, dan kolaborasi kreatif — terbuka untuk semua umur.</p>
+        <div class="tags" style="margin-bottom:14px">
+          <div class="tag">Volunteer</div>
+          <div class="tag">Workshop</div>
+          <div class="tag">Pertemuan Bulanan</div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Gabung Sekarang</button>
+          <button class="btn btn-outline" onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})">Lihat Kegiatan</button>
+        </div>
+        <div style="margin-top:18px;color:var(--muted);font-size:14px">Acara mendatang: <strong>Workshop Kreatif</strong> — 25 Agustus 2025</div>
+      </div>
+
+      <div class="hero-illu fade-up" style="--delay:.1s">
+        <!-- Ganti src dengan foto acara/komunitasmu -->
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Foto komunitas atau event">
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-title">
+        <h3>Tentang Kami</h3>
+        <div class="muted">Visi, misi, dan nilai</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start">
+        <div class="card">
+          <h4>Visi</h4>
+          <p class="muted">Menjadi komunitas yang menginspirasi perubahan positif melalui kolaborasi dan pembelajaran berkelanjutan.</p>
+
+          <h4 style="margin-top:12px">Misi</h4>
+          <ul class="muted">
+            <li>Menyelenggarakan kegiatan edukatif dan sosial.</li>
+            <li>Membangun jaringan antarpelaku kreatif.</li>
+            <li>Mendukung inisiatif lokal untuk dampak sosial.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Profil Singkat</h4>
+          <p class="muted">Didirikan tahun 2018, kami telah mengadakan ratusan workshop dan aksi sosial yang melibatkan ratusan relawan.</p>
+          <div style="margin-top:10px" class="muted-block">
+            <strong>Ketua:</strong> Nama Ketua<br>
+            <strong>Anggota:</strong> 420+<br>
+            <strong>Lokasi:</strong> Kota Anda
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="events">
+      <div class="section-title">
+        <h3>Kegiatan & Event</h3>
+        <div class="muted">Acara terbaru dan arsip kegiatan</div>
+      </div>
+      <div class="card-row">
+        <article class="card fade-up">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:72px;height:72px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)">
+              <img src="https://images.unsplash.com/photo-1509223197845-458d87318791?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" style="width:100%;height:100%;object-fit:cover" alt="event">
+            </div>
+            <div>
+              <h4>Workshop Kreatif</h4>
+              <div class="muted">25 Agustus 2025 • 09:00 - 15:00</div>
+            </div>
+          </div>
+          <p class="muted" style="margin-top:10px">Pelajari teknik desain, storytelling, dan pengelolaan proyek kreatif dalam satu hari intensif bersama praktisi.</p>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+            <div class="muted">Tempat: Aula Komunitas</div>
+            <button class="btn btn-outline" onclick="openEvent('Workshop Kreatif','Pelatihan 1 hari tentang desain dan storytelling.','25 Agustus 2025')">Lihat Detail</button>
+          </div>
+        </article>
+
+        <article class="card fade-up">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:72px;height:72px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)">
+              <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" style="width:100%;height:100%;object-fit:cover" alt="event">
+            </div>
+            <div>
+              <h4>Kerja Sosial Lingkungan</h4>
+              <div class="muted">10 Juli 2025 • 07:30 - 11:00</div>
+            </div>
+          </div>
+          <p class="muted" style="margin-top:10px">Aksi bersih-bersih dan penghijauan di lingkungan sekitar, bekerjasama dengan pemerintah setempat.</p>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+            <div class="muted">Tempat: Taman Kota</div>
+            <button class="btn btn-outline" onclick="openEvent('Kerja Sosial','Aksi bersih-bersih & penghijauan.','10 Juli 2025')">Lihat Detail</button>
+          </div>
+        </article>
+
+        <article class="card fade-up">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:72px;height:72px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)">
+              <img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" style="width:100%;height:100%;object-fit:cover" alt="event">
+            </div>
+            <div>
+              <h4>Pertemuan Bulanan</h4>
+              <div class="muted">Setiap Bulan • Sabtu</div>
+            </div>
+          </div>
+          <p class="muted" style="margin-top:10px">Sesi sharing, networking, dan perencanaan kegiatan komunitas setiap akhir bulan.</p>
+          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+            <div class="muted">Tempat: Ruang Komunitas</div>
+            <button class="btn btn-outline" onclick="openEvent('Pertemuan Bulanan','Sesi sharing & networking.','Setiap Bulan')">Lihat Detail</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="section-title">
+        <h3>Galeri Foto</h3>
+        <div class="muted">Dokumentasi kegiatan kita</div>
+      </div>
+      <div class="gallery">
+        <!-- Ganti src dengan foto nyata dari kegiatanmu -->
+        <img src="https://images.unsplash.com/photo-1506349044126-4b6f7a33c009?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="galeri" onclick="openGallery(this.src)">
+        <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="galeri" onclick="openGallery(this.src)">
+        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="galeri" onclick="openGallery(this.src)">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="galeri" onclick="openGallery(this.src)">
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-title">
+        <h3>Kontak & Gabung</h3>
+        <div class="muted">Kirim pesan atau hubungi kami</div>
+      </div>
+      <div class="contact-grid">
+        <div class="card form">
+          <label class="muted">Nama</label>
+          <input id="name" placeholder="Nama lengkap" required>
+          <label class="muted" style="margin-top:8px">Email</label>
+          <input id="email" type="email" placeholder="email@domain.com" required>
+          <label class="muted" style="margin-top:8px">Pesan</label>
+          <textarea id="message" placeholder="Tuliskan pesan atau alasan bergabung..." required></textarea>
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+            <button class="btn btn-primary" id="sendBtn">Kirim Pesan</button>
+            <div id="formMsg" class="muted" style="font-size:14px"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Alamat & Sosial</h4>
+          <p class="muted">Jalan Contoh No.123 · Kota Anda · Indonesia</p>
+          <p class="muted"><strong>Jam Operasional:</strong> Senin–Sabtu, 09:00–17:00</p>
+          <div style="margin-top:8px">
+            <a class="muted" href="#" style="display:inline-block;margin-right:10px"><i class="fab fa-facebook fa-lg"></i></a>
+            <a class="muted" href="#" style="display:inline-block;margin-right:10px"><i class="fab fa-instagram fa-lg"></i></a>
+            <a class="muted" href="#" style="display:inline-block;margin-right:10px"><i class="fab fa-youtube fa-lg"></i></a>
+          </div>
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0">
+          <h4>Info Cepat</h4>
+          <div class="muted">Ingin bergabung sebagai relawan? Isi formulir di samping dengan subjek "Relawan".</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div class="muted">© <span id="year"></span> Nama Komunitas — Semua hak cipta dilindungi</div>
+      <div class="muted">Dibuat dengan ♥ oleh Tim Komunitas</div>
+    </div>
+  </footer>
+
+  <!-- Modal untuk event & gallery -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:start">
+        <div>
+          <h3 id="modalTitle">Judul Event</h3>
+          <div id="modalWhen" class="muted"></div>
+        </div>
+        <button onclick="closeModal()" style="background:none;border:0;color:var(--muted);font-size:18px"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="modalBody" style="margin-top:12px;color:var(--muted)">Deskripsi singkat event atau foto.</div>
+    </div>
+  </div>
+
+  <script>
+    // small helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // fade-up reveal on load
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('.fade-up').forEach((el,i)=>{
+        setTimeout(()=>el.classList.add('show'), i*120);
+      });
+    });
+
+    // Mobile menu toggle (simple)
+    const menuBtn = document.querySelector('.menu-btn');
+    const navList = document.querySelector('nav ul');
+    menuBtn?.addEventListener('click', ()=>{
+      if(navList.style.display === 'flex') navList.style.display = '';
+      else navList.style.display = 'flex';
+      navList.style.flexDirection = 'column';
+      navList.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))';
+      navList.style.padding = '12px';
+      navList.style.borderRadius = '10px';
+    });
+
+    // Modal
+    function openEvent(title, desc, when){
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalWhen').textContent = when;
+      document.getElementById('modalBody').textContent = desc;
+      document.getElementById('modal').classList.add('open');
+    }
+    function openGallery(src){
+      document.getElementById('modalTitle').textContent = 'Foto Kegiatan';
+      document.getElementById('modalWhen').textContent = '';
+      document.getElementById('modalBody').innerHTML = '<img src="'+src+'" style="width:100%;border-radius:8px;display:block">';
+      document.getElementById('modal').classList.add('open');
+    }
+    function closeModal(){
+      document.getElementById('modal').classList.remove('open');
+      document.getElementById('modalBody').innerHTML = '';
+    }
+    document.getElementById('modal').addEventListener('click', (e)=>{ if(e.target.id==='modal') closeModal(); });
+
+    // Contact form (demo only)
+    const sendBtn = document.getElementById('sendBtn');
+    sendBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const formMsg = document.getElementById('formMsg');
+      if(!name || !email || !message){ formMsg.textContent = 'Isi semua kolom dulu ya.'; return; }
+      // Simulate submit (replace with actual API endpoint or email integration)
+      formMsg.textContent = 'Mengirim...';
+      setTimeout(()=>{
+        formMsg.textContent = 'Terima kasih — pesan telah dikirim.';
+        document.getElementById('name').value='';
+        document.getElementById('email').value='';
+        document.getElementById('message').value='';
+      },900);
+    });
+
+    // Smooth scrolling for nav links
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const id = a.getAttribute('href').slice(1);
+        document.getElementById(id).scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+  </script>
+</body>
+</html>
